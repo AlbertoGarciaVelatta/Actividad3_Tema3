@@ -10,6 +10,9 @@ COPY build.gradle.kts settings.gradle.kts ./
 COPY gradle gradle
 COPY gradlew gradlew
 
+# (anti-CRLF y permisos de ejecución)
+RUN sed -i 's/\r$//' gradlew && chmod +x gradlew
+
 # Pre-resuelve dependencias (mejora la cache)
 RUN ./gradlew --no-daemon dependencies || true
 
